@@ -1,0 +1,12 @@
+{
+    "credentials": {
+        "username": "rsandoval",
+        "password": "rsandoval"
+    },
+    "url": "http://localhost:1337",
+    "prefix": "api/v1",
+    "status": "user",
+    "data": "data",
+    "sniffer": "sniffer",
+    "signin": "auth/signin"
+}
