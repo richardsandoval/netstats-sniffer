@@ -1,6 +1,6 @@
 class Sniffer(object):
     def __init__(self, istcp, smac, dmac, sip, dip, flags, protocol, length, sudp, dudp, stcp, dtcp, payload, version,
-                 user):
+                 user, host):
         self.dmac = dmac
         self.sip = sip
         self.dip = dip
@@ -16,3 +16,4 @@ class Sniffer(object):
         self.istcp = istcp
         self.version = version
         self.user = user
+        self.host = host

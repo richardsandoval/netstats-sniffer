@@ -31,7 +31,7 @@ class SnifferReader(object):
         eth_protocol = socket.ntohs(eth[2])
 
         sniffer = Sniffer(None, None, None, None, None, None, None, None, None, None, None, None, None, None,
-                          self.user.id)
+                          self.user.id, None)
         sniffer.dmac = eth_addr(packet[0:6])
         sniffer.smac = eth_addr(packet[6:12])
         sniffer.protocol = str(eth_protocol)
