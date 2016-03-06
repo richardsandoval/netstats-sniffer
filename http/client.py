@@ -19,6 +19,10 @@ class SnifferClient(object):
         self.opts = json.loads(open('config.json').read())
 
     def post_sniffer(self, sniffer):
+
+        if sniffer.dip == sniffer.sip:
+            return
+
         try:
             uri = "{0}/{1}/{2}".format(self.opts['url'],
                                        self.opts['prefix'],

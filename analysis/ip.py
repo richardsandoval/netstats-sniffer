@@ -33,6 +33,11 @@ class IP(object):
         self.sniffer.protocol = protocol
         self.sniffer.sip = s_addr
         self.sniffer.dip = d_addr
+
+        self.sniffer.host = self._getdnsbyip(self.sniffer.dip)
+        if self.sniffer.host is None:
+            self.sniffer.host = self._getdnsbyip(self.sniffer.sip)
+
         t = iph_length + self.eth_length
 
         if protocol == 6:
@@ -44,3 +49,15 @@ class IP(object):
         elif protocol == 17:
             udp = UDP(t, self.sniffer, self.packet, self.user)
             udp.send_udp_packet()
+
+    def _getdnsbyip(self, ip):
+        try:
+            if '192.168.' not in ip and '10.0.' not in ip and '127.0.0' not in ip and '172.16.' not in ip:
+                ret = self.socket.gethostbyaddr(ip)
+                name = ret[0].split('.')
+                if name[len(name) - 2].find('localhost') == -1:
+                    join = (name[len(name) - 2], name[len(name) - 1])
+                    return '.'.join(join)
+            return None
+        except self.socket.herror:
+            return None

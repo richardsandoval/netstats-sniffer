@@ -30,17 +30,6 @@ class TCP(AbstractPacket):
         self.sniffer.stcp = source_port
         self.sniffer.dtcp = dest_port
         self.sniffer.payload = ''.join((c if (c in string.printable) else '.') for c in data)
-        self.sniffer.host = self._getdnsbyip(self.sniffer.dip)
+        self.sniffer.flags = acknowledgement
         self.send_packet(self.user, self.sniffer)
 
-    def _getdnsbyip(self, ip):
-        try:
-            if ip.find('127.0.0.') == -1:
-                ret = self.socket.gethostbyaddr(ip)
-                name = ret[0].split('.')
-                if name[len(name) - 2].find('localhost') == -1:
-                    join = (name[len(name) - 2], name[len(name) - 1])
-                    return '.'.join(join)
-            return None
-        except self.socket.herror:
-            return None
