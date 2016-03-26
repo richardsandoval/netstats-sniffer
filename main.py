@@ -21,4 +21,7 @@ while True:
     else:
         started = False
         w_sniffer.signal = False
+        login = Login(user)
+        login.login()
+        sniffer = SnifferClient(user)
         w_sniffer = Worker(1, user)
